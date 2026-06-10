@@ -51,7 +51,7 @@ async def search_shopee(page, keyword, limit=5):
                         "price": price,
                         "sold": ib.get("historical_sold") or 0,
                         "rating": round((ib.get("item_rating") or {}).get("rating_star") or 0, 1),
-                        "url": f"https://shopee.vn/product/{ib.get("shopid")}/{ib.get("itemid")}",
+                        "url": "https://shopee.vn/product/" + str(ib.get("shopid","")) + "/" + str(ib.get("itemid","")),
                         "is_mall": bool(ib.get("is_official_shop")),
                         "platform": "shopee",
                     })
