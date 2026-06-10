@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-10T01:29:15.986609Z",
+  "generated_at": "2026-06-10T01:58:24.833319Z",
   "source_file": "data/prices.json",
   "stats": {
-    "total_products": 8,
+    "total_products": 12,
     "has_price": 0,
-    "missing_price": 8,
+    "missing_price": 12,
     "completion_pct": 0.0,
     "est_total_cost_vnd": 0
   },
@@ -16,7 +16,11 @@
     "Missing price: QA cong nhan kem xanh",
     "Missing price: Giay an ninh thuong Oxford",
     "Missing price: Mu SSEDA trang mat vuong",
-    "Missing price: Day dai an toan 2 moc"
+    "Missing price: Day dai an toan 2 moc",
+    "Missing price: Ao phan quang ve sinh luoi",
+    "Missing price: Giay an ninh chuyen dung boot",
+    "Missing price: Ung nhua trang Thuy Duong",
+    "Missing price: Giay Safety Jogger X11"
   ],
   "products": [
     {
@@ -100,6 +104,50 @@
       "id": "day_dai_an_toan",
       "name": "Day dai an toan 2 moc",
       "sl": 10,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "ao_phan_quang_ve_sinh",
+      "name": "Ao phan quang ve sinh luoi",
+      "sl": 38,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "giay_an_ninh_cd",
+      "name": "Giay an ninh chuyen dung boot",
+      "sl": 17,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "ung_nhua_trang",
+      "name": "Ung nhua trang Thuy Duong",
+      "sl": 203,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "giay_safety_jogger",
+      "name": "Giay Safety Jogger X11",
+      "sl": 30,
       "is_hop_quy": false,
       "note": "",
       "don_gia": null,
