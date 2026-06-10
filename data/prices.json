@@ -1,7 +1,71 @@
 {
-  "scraped_at": null,
-  "total": 0,
+  "scraped_at": "2026-06-10T01:27:42.709595Z",
+  "total": 8,
   "has_price": 0,
-  "products": {},
-  "_note": "This file is auto-updated by GitHub Actions. Run the workflow to populate."
+  "products": {
+    "gang_vai_cong_nhan": {
+      "id": "gang_vai_cong_nhan",
+      "name": "Gang tay vai cong nhan",
+      "sl": 1908,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "gang_cao_su": {
+      "id": "gang_cao_su",
+      "name": "Gang tay cao su dai tay",
+      "sl": 1152,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "ao_phan_quang_an_ninh": {
+      "id": "ao_phan_quang_an_ninh",
+      "name": "Ao phan quang an ninh vang",
+      "sl": 61,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "ao_mua_k5": {
+      "id": "ao_mua_k5",
+      "name": "Ao mua K5 an ninh",
+      "sl": 60,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "qa_cong_nhan": {
+      "id": "qa_cong_nhan",
+      "name": "QA cong nhan kem xanh",
+      "sl": 211,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "giay_an_ninh_thuong": {
+      "id": "giay_an_ninh_thuong",
+      "name": "Giay an ninh thuong Oxford",
+      "sl": 111,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "mu_sseda_trang": {
+      "id": "mu_sseda_trang",
+      "name": "Mu SSEDA trang mat vuong",
+      "sl": 21,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    },
+    "day_dai_an_toan": {
+      "id": "day_dai_an_toan",
+      "name": "Day dai an toan 2 moc",
+      "sl": 10,
+      "scraped_at": "2026-06-10T01:27:42.709595Z",
+      "results": [],
+      "best": null
+    }
+  }
 }

@@ -1,0 +1,111 @@
+{
+  "generated_at": "2026-06-10T01:29:15.986609Z",
+  "source_file": "data/prices.json",
+  "stats": {
+    "total_products": 8,
+    "has_price": 0,
+    "missing_price": 8,
+    "completion_pct": 0.0,
+    "est_total_cost_vnd": 0
+  },
+  "warnings": [
+    "Missing price: Gang tay vai cong nhan",
+    "Missing price: Gang tay cao su dai tay",
+    "Missing price: Ao phan quang an ninh vang",
+    "Missing price: Ao mua K5 an ninh",
+    "Missing price: QA cong nhan kem xanh",
+    "Missing price: Giay an ninh thuong Oxford",
+    "Missing price: Mu SSEDA trang mat vuong",
+    "Missing price: Day dai an toan 2 moc"
+  ],
+  "products": [
+    {
+      "id": "gang_vai_cong_nhan",
+      "name": "Gang tay vai cong nhan",
+      "sl": 1908,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "gang_cao_su",
+      "name": "Gang tay cao su dai tay",
+      "sl": 1152,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "ao_phan_quang_an_ninh",
+      "name": "Ao phan quang an ninh vang",
+      "sl": 61,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "ao_mua_k5",
+      "name": "Ao mua K5 an ninh",
+      "sl": 60,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "qa_cong_nhan",
+      "name": "QA cong nhan kem xanh",
+      "sl": 211,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "giay_an_ninh_thuong",
+      "name": "Giay an ninh thuong Oxford",
+      "sl": 111,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "mu_sseda_trang",
+      "name": "Mu SSEDA trang mat vuong",
+      "sl": 21,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    },
+    {
+      "id": "day_dai_an_toan",
+      "name": "Day dai an toan 2 moc",
+      "sl": 10,
+      "is_hop_quy": false,
+      "note": "",
+      "don_gia": null,
+      "thanh_tien": null,
+      "url": "",
+      "status": "❌ Chưa có giá"
+    }
+  ]
+}
