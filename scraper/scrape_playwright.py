@@ -51,7 +51,7 @@ async def search_shopee(page, keyword, limit=5):
                         "price": price,
                         "sold": ib.get("historical_sold") or 0,
                         "rating": round((ib.get("item_rating") or {}).get("rating_star") or 0, 1),
-                        "url": "https://shopee.vn/product/" + str(ib.get("shopid","")) + "/" + str(ib.get("itemid","")),
+                        "url": "https://shopee.vn/product/{}/{}".format(ib.get("shopid",""), ib.get("itemid","")),
                         "is_mall": bool(ib.get("is_official_shop")),
                         "platform": "shopee",
                     })
@@ -121,7 +121,7 @@ async def run():
                 "scraped_at": timestamp, "results": results[:5], "best": best,
             }
             if best:
-                print(f"  OK {best["price"]:,}d sold={best.get("sold",0)}")
+                print("  OK {:,}d sold={}".format(best["price"], best.get("sold",0)))
             else:
                 print(f"  FAIL")
             await asyncio.sleep(random.uniform(3, 5))
