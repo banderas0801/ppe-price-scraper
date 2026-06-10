@@ -1,0 +1,59 @@
+name: Scrape PPE Prices
+
+on:
+  # Chạy tự động mỗi ngày lúc 7:00 SA GMT+7 (00:00 UTC)
+  schedule:
+    - cron: "0 0 * * *"
+  # Cho phép chạy thủ công từ GitHub UI
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: "Force update even if recently scraped"
+        required: false
+        default: "false"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scraper
+        run: |
+          python scraper/scrape.py data/prices.json
+        env:
+          PYTHONUNBUFFERED: "1"
+
+      - name: Run price validator
+        run: python scraper/validate.py data/prices.json
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/prices.json data/summary.json
+          TIMESTAMP=$(date -u "+%Y-%m-%d %H:%M UTC")
+          CHANGES=$(git diff --cached --stat | tail -1)
+          git commit -m "chore: update prices ${TIMESTAMP} (${CHANGES})" || echo "No changes to commit"
+          git push
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: price-data
+          path: data/
+          retention-days: 30
