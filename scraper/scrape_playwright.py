@@ -38,10 +38,18 @@ async def search_shopee(page, keyword, limit=5):
         )
         await asyncio.sleep(random.uniform(4, 6))
 
-        print(f"  [DEBUG] api_data={len(api_data)}")
+        print("  [DEBUG] api_data={}".format(len(api_data)))
 
         for data in api_data:
-            for item in (data.get("items") or [])[:limit]:
+            items_raw = data.get("items") or []
+            print("  [DEBUG] items_count={}".format(len(items_raw)))
+            if items_raw:
+                sample = items_raw[0]
+                print("  [DEBUG] top_keys={}".format(list(sample.keys())[:8]))
+                ib_s = sample.get("item_basic") or sample
+                print("  [DEBUG] ib_keys={}".format(list(ib_s.keys())[:10]))
+                print("  [DEBUG] price={} name={}".format(ib_s.get("price"), str(ib_s.get("name",""))[:30]))
+            for item in items_raw[:limit]:
                 ib = item.get("item_basic") or item
                 price_raw = ib.get("price") or ib.get("price_min") or 0
                 price = round(price_raw / 100000) if price_raw else 0
@@ -57,8 +65,7 @@ async def search_shopee(page, keyword, limit=5):
                     })
             if results:
                 break
-
-        print(f"  [DEBUG] results={len(results)}")
+        print("  [DEBUG] results={}".format(len(results)))
 
     except Exception as e:
         print(f"  [ERR] {e}")
