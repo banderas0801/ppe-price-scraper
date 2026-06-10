@@ -73,6 +73,32 @@ def safe_get(url, **kwargs):
         return None
 
 # ── Shopee scraper ───────────────────────────────────────────────────────────
+def init_shopee_session():
+    """Init Shopee session to get cookies before searching"""
+    session = requests.Session()
+    try:
+        # Hit homepage first to get session cookies
+        r = session.get(
+            "https://shopee.vn",
+            headers=get_headers(),
+            timeout=10,
+            allow_redirects=True,
+        )
+        print(f"  [SESSION] status={r.status_code} cookies={list(session.cookies.keys())}")
+        time.sleep(random.uniform(1.0, 2.0))
+    except Exception as e:
+        print(f"  [SESSION ERROR] {e}")
+    return session
+
+# Global session
+_session = None
+
+def get_session():
+    global _session
+    if _session is None:
+        _session = init_shopee_session()
+    return _session
+
 def shopee_search(keyword, limit=10):
     """Search Shopee VN, sort by sales, return top results"""
     url = (
@@ -80,9 +106,31 @@ def shopee_search(keyword, limit=10):
         f"?by=sales&keyword={quote(keyword)}&limit={limit}"
         f"&newest=0&order=desc&page_type=search&scenario=PAGE_OTHERS&version=2"
     )
-    r = safe_get(url, headers=get_headers("https://shopee.vn/"))
+    session = get_session()
+    headers = {
+        **get_headers("https://shopee.vn/search"),
+        "X-Api-Source": "pc",
+        "X-Shopee-Language": "vi",
+        "X-Requested-With": "XMLHttpRequest",
+        "Accept": "application/json",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "sec-ch-ua": '"Chromium";v="124", "Google Chrome";v="124"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "Sec-Fetch-Dest": "empty",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Site": "same-origin",
+    }
+    try:
+        r = session.get(url, headers=headers, timeout=15)
+    except Exception as e:
+        print(f"  [SHOPEE SEARCH ERROR] {e}")
+        return []
+
     if not r or r.status_code != 200:
         print(f"  [SHOPEE SEARCH] status={getattr(r,'status_code','err')} kw={keyword[:40]}")
+        # Try fallback: Tiki only for this product
         return []
     try:
         data = r.json()
@@ -103,7 +151,9 @@ def shopee_search(keyword, limit=10):
                 "item_id": item_basic.get("itemid"),
                 "url": f"https://shopee.vn/product/{item_basic.get('shopid')}/{item_basic.get('itemid')}",
                 "is_mall": item_basic.get("is_official_shop", False),
+                "platform": "shopee",
             })
+        print(f"  [SHOPEE] Got {len(results)} results for: {keyword[:40]}")
         return results
     except Exception as e:
         print(f"  [PARSE ERROR] {e}")
@@ -136,14 +186,14 @@ def pick_best_shopee_result(results, expected_price=None):
     if not results:
         return None
     # Filter out items with 0 price
-    results = [r for r in results if r["price"] > 0]
+    results = [r for r in results if r.get("price", 0) > 0]
     if not results:
         return None
     # Sort: mall first, then rating desc, then sold desc
     results.sort(key=lambda x: (
-        not x["is_mall"],
-        -(x["rating"] or 0),
-        -(x["sold"] or 0)
+        not x.get("is_mall", False),
+        -(x.get("rating") or 0),
+        -(x.get("sold") or 0)
     ))
     return results[0]
 
@@ -165,7 +215,9 @@ def tiki_search(keyword, limit=5):
                 "sold": item.get("quantity_sold", {}).get("value", 0) if isinstance(item.get("quantity_sold"), dict) else 0,
                 "rating": item.get("rating_average", 0),
                 "url": f"https://tiki.vn/{item.get('url_path', '')}",
+                "is_mall": item.get("is_official", False),
                 "is_official": item.get("is_official", False),
+                "platform": "tiki",
             })
         return results
     except Exception as e:
