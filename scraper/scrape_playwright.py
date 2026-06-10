@@ -25,7 +25,8 @@ async def search_shopee(page, keyword, limit=5):
                 pass
     page.on("response", handle_response)
     try:
-        await page.goto(f"https://shopee.vn/search?keyword={keyword}&sortBy=sales", wait_until="networkidle", timeout=25000)
+        await page.goto(f"https://shopee.vn/search?keyword={keyword}&sortBy=sales", wait_until="domcontentloaded", timeout=25000)
+        await asyncio.sleep(random.uniform(3, 5))
         await asyncio.sleep(random.uniform(2, 3))
         for data in api_data:
             for item in (data.get("items") or [])[:limit]:
@@ -36,6 +37,7 @@ async def search_shopee(page, keyword, limit=5):
                     results.append({"name": ib.get("name",""), "price": price, "sold": ib.get("historical_sold") or 0, "rating": round((ib.get("item_rating") or {}).get("rating_star") or 0, 1), "url": f"https://shopee.vn/product/{ib.get('shopid')}/{ib.get('itemid')}", "is_mall": bool(ib.get("is_official_shop")), "platform": "shopee"})
             if results:
                 break
+        print(f"  [DEBUG] api_data count: {len(api_data)}, results: {len(results)}")
     except Exception as e:
         print(f"  [ERR] {e}")
     finally:
@@ -60,7 +62,8 @@ async def run():
         page = await context.new_page()
         print("Warming up...")
         try:
-            await page.goto("https://shopee.vn", wait_until="networkidle", timeout=25000)
+            await page.goto("https://shopee.vn", wait_until="domcontentloaded", timeout=25000)
+        await asyncio.sleep(random.uniform(3, 5))
             await asyncio.sleep(random.uniform(2, 3))
             print(f"  OK. Cookies: {len(await context.cookies())}")
         except Exception as e:
